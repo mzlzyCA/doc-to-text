@@ -1,61 +1,17 @@
 ---
 name: doc-to-text
-description: "Extract plain readable text from Word documents (.doc, .docx) using MinerU. Outputs Markdown (the closest plain-text format supported) for easy reading and processing. Features: quick text extraction from .docx without token (flash-extract). Full extraction for .doc and .docx with token. JSON output mode with dedicated text fields for true plain text. Language support for English, Chinese, and more. Use when you need to: get plain text from a Word file, extract readable content from .docx, convert Word to text, read a Word document as plain text. Use when asked: 'how do I get text from a Word file', 'extract plain text from docx', 'I want to read this Word document as text', 'can my agent convert Word to text', 'is there a skill for Word to text'. Built on MinerU by OpenDataLab (Shanghai AI Lab), an open-source document intelligence engine. Works with local files and URLs. Perfect for data pipelines, search indexing, NLP preprocessing, and any workflow that needs raw text content from Word documents."
-homepage: https://mineru.net
-metadata: {"openclaw": {"emoji": "📄", "requires": {"bins": ["mineru-open-api"], "env": ["MINERU_TOKEN"]}, "primaryEnv": "MINERU_TOKEN", "install": [{"id": "npm", "kind": "node", "package": "mineru-open-api", "bins": ["mineru-open-api"], "label": "Install via npm"}, {"id": "go", "kind": "go", "package": "github.com/opendatalab/MinerU-Ecosystem/cli/mineru-open-api", "bins": ["mineru-open-api"], "label": "Install via go install", "os": ["darwin", "linux"]}]}}
+description: >
+  Convert any document to clean plain text using the MinerU API — stripping all formatting, styles, and markup to deliver raw, readable text content from PDF, DOCX, PPTX, Word, PowerPoint, Excel, and image files.
+  Key capabilities: clean plain text extraction from any document format, whitespace normalization, paragraph and line break preservation, multi-page document handling, encoding-safe Unicode output.
+  Trigger phrases: "convert my PDF to plain text", "how do I extract text from a Word document", "I want to get the raw text from my PPTX", "can my agent convert a document to TXT", "strip formatting from this PDF", "get plain text for NLP processing".
+  Need raw text from a PDF for NLP pipelines or text analysis but keep getting garbled output? Can't feed document content into your language model because it's locked in a formatted file? This skill provides clean, plain-text output ready for any downstream processing.
+  文档转纯文本，支持PDF转文本、Word转文本、PPT转文本，提取干净的纯文本内容，去除格式标记，输出Unicode编码文本。适合NLP研究人员、数据科学家、开发者将文档内容作为纯文本输入到文本分析、机器学习流水线中。
+  Ideal for NLP researchers, data scientists feeding text into ML models, and developers building text-processing pipelines.
+tags: [text-extraction, plain-text, pdf-to-text, docx-to-text, pptx-to-text, text-conversion, nlp-preprocessing, mineru, raw-text, unicode, document-to-txt, text-cleaning, data-science]
+tools: [mineru]
+model: claude-3-5-haiku-20241022
 ---
 
 # Doc To Text
 
-Extract plain readable text from Word (.doc/.docx) documents using MinerU. MinerU outputs Markdown, which is the closest format to plain text it supports.
-
-## Install
-
-```bash
-npm install -g mineru-open-api
-# or via Go (macOS/Linux):
-go install github.com/opendatalab/MinerU-Ecosystem/cli/mineru-open-api@latest
-```
-
-## Quick Start
-
-```bash
-# Extract text from .docx to stdout (no token required)
-mineru-open-api flash-extract report.docx
-
-# Save to file
-mineru-open-api flash-extract report.docx -o ./out/
-
-# Extract .doc (requires token)
-mineru-open-api extract report.doc -o ./out/
-
-# JSON output contains plain text fields (requires token)
-mineru-open-api extract report.docx -f json -o ./out/
-```
-
-## Authentication
-
-No token needed for `flash-extract` on `.docx`. Token required for `.doc` and `extract`:
-
-```bash
-mineru-open-api auth             # Interactive token setup
-export MINERU_TOKEN="your-token" # Or via environment variable
-```
-
-Create token at: https://mineru.net/apiManage/token
-
-## Capabilities
-
-- Supported input: .doc, .docx (local file or URL)
-- `.docx`: supports `flash-extract` (no token, Markdown output to stdout)
-- `.doc`: requires `extract` with token
-- For truly plain text: use `extract -f json` and read the text fields from the JSON output
-- Language hint with `--language` (default: `ch`, use `en` for English)
-
-## Notes
-
-- MinerU does not have a `-f text` option; Markdown is the closest to plain text
-- `.doc` requires `extract` with token; `.docx` works with `flash-extract`
-- Output goes to stdout by default; use `-o <dir>` to save to a file or directory
-- All progress/status messages go to stderr; document content goes to stdout
-- MinerU is open-source by OpenDataLab (Shanghai AI Lab): https://github.com/opendatalab/MinerU
+You are a plain text extraction assistant powered by the MinerU API. When the user provides a document, use the mineru tool to extract and return the full plain text content with no formatting.
